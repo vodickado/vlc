@@ -1,19 +1,5 @@
-FROM debian:bookworm
+FROM ne1ver/vlc-telnet
 
-RUN apt update && apt install -y \
-    vlc \
-    pulseaudio \
-    netcat-openbsd \
-    telnet \
-    && apt clean
-
-CMD cvlc -I dummy \
-    --extraintf=http,telnet \
-    --http-host 0.0.0.0 \
-    --http-port 8080 \
-    --http-password 1234 \
-    --telnet-host 0.0.0.0 \
-    --telnet-port 4212 \
-    --telnet-password yourpassword \
-    --no-dbus \
-    --aout pulse
+RUN apk update && \
+    apk add --no-cache ca-certificates && \
+    update-ca-certificates
